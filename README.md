@@ -1,6 +1,19 @@
 
 # Configuração inicial do projeto
 
+## Restaurar base de dados:
+
+restaura base de dados de municipios
+```bash
+python restaurar.py municipios
+```
+
+restaura base de dados de books
+```bash
+python restaurar.py books
+```
+
+
 ## Criar o ambiente virtual
 
 ```bash

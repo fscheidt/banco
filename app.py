@@ -14,33 +14,16 @@ def get_connection(database: str):
   db = client[database]
   return db
 
-db = get_connection(db_name)
-print(db.list_collection_names()) # base geobr
+def get_municipios_estado(db, _uf: str) -> list:
+    res = db.municipios.find(
+        { 'Uf': _uf}, { '_id': 0, 'Nome': 1 }
+    )
+    return list(res)
 
-# executar o arquivo pelo terminal:
-# python3 app.py
+if __name__ == "__main__":
+    db = get_connection(db_name)
+    print(db.list_collection_names()) # base geobr
 
-def get_municipios_estado(_uf: str) -> list:
-  # res = resultado da consulta
-  res = db.municipios.find(
-    { 'Uf': _uf}, { '_id': 0, 'Nome': 1 }
-  )
-  return list(res)
-
-# ATIVIDADEs: 
-# 1. Consulta todos os municipios do Acre
-
-result = get_municipios_estado("AC")
-print(f'total = {len(result)}')
-pprint(result) #  22
-
-# 2. Consulta municipios Roraima (total = )
-# get_municipios_estado("RR")
-
-# 3. Consulta municipios com nome Cascavel, remover o _id do result
-
-# 4. Municipios que começam com a letra W
-
-# 5. Municípios da região Norte
-
-# 6. Ranking dos estados com maior quantidade de municipios
+    result = get_municipios_estado(db, "AC")
+    print(f'total = {len(result)}')
+    pprint(result) #  22
