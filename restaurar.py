@@ -1,5 +1,5 @@
 import argparse
-import requests
+import requests  # pip install requests
 from app import get_connection
 
 dados = {
