@@ -27,5 +27,5 @@ source env/bin/activate
 
 ## Instalar as bibliotecas (dependências)
 ```
-pip install pymongo python-dotenv
+pip install pymongo python-dotenv requests
 ```
