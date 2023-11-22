@@ -2,7 +2,7 @@ import argparse
 import requests  # pip install requests
 from app import get_connection
 
-dados = {
+dados = {  # <== adicionar outras bases de dados aqui
     "municipios" : {
       "db_name": "geobr",
       "collection": "municipios",
@@ -13,6 +13,11 @@ dados = {
       "collection": "books",
       "url": "https://raw.githubusercontent.com/fscheidt/iotdb-23/master/dados/books.json",
     },
+#    "devices" : {
+#      "db_name": "devicesdb",
+#      "collection": "temp",
+#      "url": "https://raw.githubusercontent.com/fscheidt/iotdb-23/master/dados/books.json",
+#    },
 }
 
 def restore(perfil: str):
