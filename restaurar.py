@@ -13,11 +13,11 @@ dados = {  # <== adicionar outras bases de dados aqui
       "collection": "books",
       "url": "https://raw.githubusercontent.com/fscheidt/iotdb-23/master/dados/books.json",
     },
-#    "devices" : {
-#      "db_name": "devicesdb",
-#      "collection": "temp",
-#      "url": "https://raw.githubusercontent.com/fscheidt/iotdb-23/master/dados/books.json",
-#    },
+    "paises" : {
+      "db_name": "paisesdb",
+      "collection": "paises",
+      "url": "https://raw.githubusercontent.com/fscheidt/iotdb-23/master/dados/paises.json",
+    },
 }
 
 def restore(perfil: str):
@@ -29,8 +29,10 @@ def restore(perfil: str):
     collection = recurso['collection']
 
     def download_json_file(file_url):
-        with requests.get(file_url, stream=True) as r:
+        with requests.get(file_url) as r:
             data = r.json()
+            for d in data:   # <= 
+                del d["_id"]  # <= remove campo _id 
         return data
 
     data = download_json_file(recurso['url'])
@@ -47,8 +49,10 @@ def restore(perfil: str):
 
 if __name__ == "__main__":
     """
+    Exemplos para restaturar: 
     python restaurar.py municipios
     python restaurar.py books
+    python restaurar.py paises
     """
     parser = argparse.ArgumentParser("restaurar")
     parser.add_argument("perfil", help="municipios ou books", type=str)
