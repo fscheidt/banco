@@ -84,3 +84,19 @@ pprint(res)
 
 # Quais são os idiomas oficiais dos paises com mais
 # de 4 idiomas
+
+
+## GROUP BY
+
+# (13) Sumarização: Total de países por `subregion`
+query = db.paises.aggregate([ 
+  {"$group": 
+    {
+      "_id": "$subregion",
+      "paises": { 
+          "$sum": 1 
+      }
+    }
+   }
+])
+pprint(list(query))
