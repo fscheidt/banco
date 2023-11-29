@@ -32,7 +32,8 @@ def restore(perfil: str):
         with requests.get(file_url) as r:
             data = r.json()
             for d in data:   # <= 
-                del d["_id"]  # <= remove campo _id 
+                if "_id" in d:
+                    del d["_id"]  # <= remove campo _id 
         return data
 
     data = download_json_file(recurso['url'])
