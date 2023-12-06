@@ -1,15 +1,26 @@
-from app import get_connection
+import sys
 from pprint import pprint
-db = get_connection(database="paisesdb")
+from pathlib import Path
+sys.path.append(str(Path(__file__).parent.parent))
+import database
+
+db = database.get_connection(db_name="paisesdb")
+
 def consulta_codigo_area(cod):
-  """ Qual o pais com codigo de chamada "cod" ? """
-  doc = db.paises.find_one(
-    {"callingCode": cod}, 
-    {"name.common": 1, "_id": 0}
-  )
-  pprint(doc)
-consulta_codigo_area("55") # => Brazil
-consulta_codigo_area("595") # => Py
+    """ Qual o pais com codigo de chamada "cod" ? """
+    doc = db.paises.find_one(
+        {"callingCode": cod}, 
+        {"name.common": 1, "_id": 0}
+    )
+    return doc
+
+doc = consulta_codigo_area("55") # => Brazil
+pprint(doc)
+
+print("="*40)
+
+doc = consulta_codigo_area("595") # => Py
+pprint(doc)
 
 print("="*40)
 print("Paises com fronteira com Brazil:")
@@ -47,10 +58,6 @@ consulta = db.paises.aggregate(
 ])
 
 pprint(list(consulta))
-
-
-
-
 
 
 # (12) Países que possuem mais de um idioma oficial:

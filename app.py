@@ -1,29 +1,26 @@
-import os
 from pprint import pprint
-import dotenv
 from pymongo.mongo_client import MongoClient
+from database import get_connection
 
-env_file = ".env"
-db_name = "geobr"
-dotenv.load_dotenv(env_file)
-URL = os.environ["db_url"]
+# FUNÇÕES DE CONSULTA:
 
-def get_connection(database: str):
-  """ obtem a conexao com o banco de dados """
-  client = MongoClient(URL)
-  db = client[database]
-  return db
-
-def get_municipios_estado(db, _uf: str) -> list:
+def get_municipios_por_estado(db, _uf: str) -> list:
     res = db.municipios.find(
         { 'Uf': _uf}, { '_id': 0, 'Nome': 1 }
     )
     return list(res)
 
+# Executa script:
 if __name__ == "__main__":
-    db = get_connection(db_name)
-    print(db.list_collection_names()) # base geobr
 
-    result = get_municipios_estado(db, "AC")
-    print(f'total = {len(result)}')
-    pprint(result) #  22
+    DB_NAME = "geobr"
+    
+    db = get_connection(DB_NAME)
+    print(db.list_collection_names())
+
+    print("="*40)
+    print("Municípios do estado do Acre")
+    result = get_municipios_por_estado(db, "AC")
+    pprint(result) 
+    print(f'total = {len(result)}') #  22
+    print("="*40)
