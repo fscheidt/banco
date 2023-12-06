@@ -73,3 +73,9 @@ Script com exemplos de consultas no banco de dados `paisesdb`:
 ```bash
 python3 consultas/paises.py
 ```
+
+### consulta informações sobre o banco de dados
+
+```bash
+python3 database.py paisesdb
+```
