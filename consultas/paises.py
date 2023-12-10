@@ -4,6 +4,11 @@ from pathlib import Path
 sys.path.append(str(Path(__file__).parent.parent))
 import database
 
+###############################################
+# rodar no terminal:
+# python3 consultas/paises.py
+############################################### 
+
 db = database.get_connection(db_name="paisesdb")
 
 def consulta_codigo_area(cod):
@@ -26,17 +31,13 @@ print("="*40)
 print("Paises com fronteira com Brazil:")
 paises = list(
   db.paises.find(
-    # operador in pesquisa nos valores dentro do vetor
-    { "borders": { "$in": ["BRA"] } },
-    {"name.common":1, "_id":0}
+      # operador in pesquisa nos valores dentro do vetor
+      { "borders": { "$in": ["BRA"] } },
+      {"name.common":1, "_id":0}
     )
 )
 print("fazem fronteira:", len(paises))
 pprint(paises)
-
-# rodar no terminal:
-# python3 paises_consultas.py
-
 
 consulta = db.paises.aggregate( 
 [

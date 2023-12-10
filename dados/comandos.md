@@ -1,6 +1,6 @@
 # Comandos
 
-## Exporta dados do atlas
+## Exporta dados para o atlas cloud
 
 Abrir o terminal na pasta do projeto. Acessar a pasta dados:
 

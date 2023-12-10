@@ -1,5 +1,5 @@
 import argparse
-import requests  # pip install requests
+import requests
 from database import get_connection
 
 dados = {  # <== adicionar outras bases de dados aqui
@@ -20,21 +20,18 @@ dados = {  # <== adicionar outras bases de dados aqui
     },
 }
 
-def download_json_file(file_url):
-    with requests.get(file_url) as r:
+def download_json_file(url: str):
+    with requests.get(url) as r:
         data = r.json()
-        for row in data:   # <= 
+        for row in data:
             if "_id" in row:
-                del row["_id"]  # <= remove campo _id 
-    return data
-
+                del row["_id"]  # <= remove campo _id se existir
+        return data
 
 def restore(perfil: str, drop_db: bool = True):
     """
-
     Importa dados do arquivo json para o mongodb atlas  
         @param perfil: nome do perfil de dados (ex.: municipios)
-
     """
 
     print(f"Restaurando dados de [{perfil}] ")
@@ -42,13 +39,10 @@ def restore(perfil: str, drop_db: bool = True):
     collection = recurso['collection']
 
     data = download_json_file(recurso['url'])
-
     db = get_connection(recurso['db_name'])
 
     db[collection].drop()
-
     db[collection].insert_many(data)
-
     documents = db[collection].count_documents({})
     print(f"documentos importados: {documents}")
 
