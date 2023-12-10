@@ -1,0 +1,8 @@
+[flake8]
+exclude = .git,__pycache__,env
+extend-ignore =
+    # slice notation whitespace, invalid
+    E203
+    # bare except, handled by bugbear B001
+    E722
+max-line-length = 80
