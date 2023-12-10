@@ -66,6 +66,15 @@ pip install -r requirements.txt
 
 ```
 
+Para executar o notebook diretamente no vscode, instalar o jupyter notebook:
+
+```bash
+
+pip install -r requirements_dev.txt
+
+```
+
+
 ## Consultas
 
 Script com exemplos de consultas no banco de dados `paisesdb`:
